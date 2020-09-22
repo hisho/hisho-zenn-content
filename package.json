@@ -1,23 +1,17 @@
 {
-  "name": "hisho-zenn-content",
+  "name": "zenn-content",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "start": "npx zenn preview --port 65535",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "article": "npx zenn new:article"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hishohub/hisho-zenn-content.git"
   },
-  "keywords": [],
-  "author": "Hisho Ohmasu <hisho.web@gmail.com> (https://github.com/hishohub)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hishohub/hisho-zenn-content/issues"
-  },
-  "homepage": "https://github.com/hishohub/hisho-zenn-content#readme",
   "dependencies": {
     "zenn-cli": "^0.1.32"
   }
