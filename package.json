@@ -5,6 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
+    "postinstall": "npx zenn init",
     "start": "run-p preview server",
     "preview": "npx zenn preview --port 65535",
     "server": "browser-sync start --config bs-config.js",
