@@ -11,10 +11,6 @@
     "article": "npx zenn new:article",
     "book": "npx zenn new:book"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hishohub/hisho-zenn-content.git"
-  },
   "dependencies": {
     "zenn-cli": "^0.1.32"
   },
