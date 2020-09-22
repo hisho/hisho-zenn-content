@@ -1,5 +1,11 @@
 # Zenn-content
 
+## install
+
+```shell script
+npm ci
+```
+
 ## Preview & Watch
 ```shell script
 npm start
