@@ -4,6 +4,7 @@ const BROWSER_SYNC = {
     `books/**/*.md`,
   ],
   proxy: 'http://localhost:65535',
+  logFileChanges: false //URLをログをで流さない
 };
 
 module.exports = BROWSER_SYNC;
