@@ -15,11 +15,11 @@
     "greeting": "asciify \"Hello Zenn!\" -f standard"
   },
   "dependencies": {
-    "zenn-cli": "^0.1.32"
+    "zenn-cli": "^0.1.59"
   },
   "devDependencies": {
     "asciify": "^1.3.5",
-    "browser-sync": "^2.26.12",
+    "browser-sync": "^2.26.13",
     "npm-run-all": "^4.1.5"
   }
 }
