@@ -15,7 +15,7 @@
     "greeting": "asciify \"Hello Zenn!\" -f standard"
   },
   "dependencies": {
-    "zenn-cli": "^0.1.75"
+    "zenn-cli": "^0.1.88"
   },
   "devDependencies": {
     "asciify": "^1.3.2",
