@@ -3,23 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "main": "index.js",
   "scripts": {
-    "postinstall": "run-p init greeting",
-    "start": "run-p preview server",
+    "postinstall": "run-p init",
+    "start": "run-p preview",
     "preview": "zenn preview --port 65535",
     "article": "zenn new:article",
     "book": "zenn new:book",
-    "init": "zenn init",
-    "server": "browser-sync start --config bs-config.js",
-    "greeting": "asciify \"Hello Zenn!\" -f standard"
+    "init": "zenn init"
   },
   "dependencies": {
     "zenn-cli": "^0.1.88"
   },
   "devDependencies": {
-    "asciify": "^1.3.2",
-    "browser-sync": "^2.26.14",
     "npm-run-all": "^4.1.5"
   }
 }
