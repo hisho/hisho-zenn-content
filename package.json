@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "postinstall": "run-p init",
-    "start": "run-p preview",
+    "start": "run-p preview open",
+    "open": "open http://localhost:65535",
     "preview": "zenn preview --port 65535",
     "article": "zenn new:article",
     "book": "zenn new:book",
