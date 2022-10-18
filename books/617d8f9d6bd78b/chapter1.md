@@ -109,7 +109,9 @@ export default Page
 ![](/images/firebase-chat-book/chapter1-02.png)
 
 ## TypeScriptの設定を変更する
-とりあえず、厳しいやつにしとけばいい
+とりあえず、厳しいやつにしとけばいい   
+エイリアスの設定もする   
+エイリアスを設定することで`src`からのpathを`@src/`で呼べるようになる
 
 ```shell
 $ yarn add -D @tsconfig/strictest
@@ -132,7 +134,12 @@ $ yarn add -D @tsconfig/strictest
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+-    "incremental": true
++    "incremental": true,
++    "baseUrl": ".",
++    "paths": {
++      "@src/*": ["src/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
