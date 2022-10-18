@@ -46,7 +46,7 @@ export default Page
 ```
 
 ## この地点の画面
-![](/images/firebase-chat-book/chapter1-02.png)
+![](/images/firebase-chat-book/chapter2-01.png)
 
 ## ここまでのブランチ
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter2
