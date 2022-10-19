@@ -215,4 +215,4 @@ export const Header = () => {
 
 ![](/images/firebase-chat-book/chapter7-02.gif)
 
-https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter6
+https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter7
