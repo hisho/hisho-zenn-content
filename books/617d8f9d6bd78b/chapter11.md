@@ -225,6 +225,7 @@ export default Page
 
 ## Firebaseのセキュリティルールを変更する
 
+
 ```json
 {
   "rules": {
@@ -238,4 +239,7 @@ export default Page
 }
 ```
 
+## チャットができているか確認する
+
+![](/images/firebase-chat-book/chapter11-03.gif)
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter11
