@@ -1,3 +1,7 @@
+---
+title: "Footerの作成"
+---
+
 # Footerの作成
 
 リンクを表示させたいので、Footer.tsxを作成します。
