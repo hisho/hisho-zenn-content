@@ -1,3 +1,7 @@
+---
+title: "細かい機能を実装する"
+---
+
 ## ログイン後にチャットページにリダイレクトする
 
 ```diff tsx:src/pages/signin/index.tsx
