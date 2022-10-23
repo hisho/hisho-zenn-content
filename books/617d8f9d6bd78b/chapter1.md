@@ -8,25 +8,25 @@ Next.jsの[Getting Started](https://nextjs.org/docs/getting-started#automatic-se
 今回は、TypeScriptを使うので、`--typescript`フラグを指定します。   
 適当な場所でターミナルを開きコマンドを実行します
 
-```shell
+```shell:ターミナル
 $ yarn create next-app --typescript
 ```
    
-コマンドを実行すると`名前`を聞かれるので適当な名前を入力します。   
+コマンドを実行すると`name`を聞かれるので適当な名前を入力します。   
 今回はchat-appとします。
 
-```shell
+```shell:ターミナル
 $ ? What is your project named? › chat-app
 ```
 
 `Success! Created my-app at chat-app`と出たらインストール完了です。   
 先程作った`chat-app`フォルダに移動します
 
-```shell
+```shell:ターミナル
 $ cd chat-app
 ```
 
-```shell
+```shell:ターミナル
 $ yarn dev
 ```
 
@@ -38,24 +38,50 @@ $ yarn dev
 コマンドから削除していますが、最終的に下記のディレクトリ構成と同じになれば普通にGUIから削除しても問題ありません。
 
 ### srcディレクトリを作成する
-```shell
+```shell:ターミナル
 $ mkdir src
 ```
 
 ### 不要なファイル、フォルダを削除する
 `public`、`styles`と`pages/api`は不要なので削除します
-```shell
+```shell:ターミナル
 $ rm -rf public && rm -rf styles && rm -rf pages/api
 ```
 
 ### srcディレクトリに集約する
 `pages`ディレクトリの中身を`src`ディレクトリに移動します
-```shell
+```shell:ターミナル
 $ mv pages src/pages
 ```
 
+## ディレクトリ
+
+ここまでのディレクトリは下記のようになります。
+```diff text:ディレクトリ
+.
+├── .eslintrc.json
+├── .gitignore
+├── README.md
+├── next-env.d.ts
+├── next.config.js
+├── package.json
+-├── public
+-├── styles
+-│── pages
+-│  ├── _app.tsx
+-│  ├── index.tsx
+-│  └── api
+-│       └── hello.ts
++├── src
++│   └── pages
++│       ├── _app.tsx
++│       └── index.tsx
+├── tsconfig.json
+└── yarn.lock
+```
+
 ## _app.tsxを整理する
-`src/pages/_app.tsx`の`globals.css`を削除します。
+`src/pages/_app.tsx`の`globals.css`が不要になったので削除します。
 
 ```diff tsx:src/pages/_app.tsx
 - import '../styles/globals.css'
@@ -70,7 +96,7 @@ export default MyApp
 
 ## index.tsxを整理する
 pages/index.tsxは中身をすべて消して下記のようにします。   
-`export default`するので変数名はなんでもいいので`Page`に統一するために`Home`を`Page`に変更します。
+`const Home: NextPage = () => {}`の部分の変数名は`export default`するのでなんでもいいので`Page`に統一するために`Home`を`Page`に変更します。
 
 ```diff tsx:src/pages/index.tsx
 import type { NextPage } from 'next'
@@ -82,42 +108,28 @@ import type { NextPage } from 'next'
   )
 }
 
-export default Page
-```
-
-## ここまでのディレクトリ
-
-ここまでのディレクトリは下記のようになります。
-```shell
-.
-├── .eslintrc.json
-├── .gitignore
-├── README.md
-├── next-env.d.ts
-├── next.config.js
-├── package.json
-├── src
-│   └── pages
-│       ├── _app.tsx
-│       └── index.tsx
-├── tsconfig.json
-└── yarn.lock
+-export default Home
++export default Page
 ```
 
 ## ここまでの画面
-なにもなくなって寂しい🥲
+なにもなくなりました。
 ![](/images/firebase-chat-book/chapter1-02.png)
 
 ## TypeScriptの設定を変更する
-とりあえず、厳しいやつにしとけばいい   
-エイリアスの設定もする   
-エイリアスを設定することで`src`からのpathを`@src/`で呼べるようになる
+`TypeScript`の設定は厳しければ厳しいほどいいですが、自分で設定を書くのは面倒くさいので`@tsconfig/strictest`を導入します。   
+[Next.jsバージョン](https://github.com/tsconfig/bases#nextjs-tsconfigjson)もありますが、2022/10月地点では動かないので`@tsconfig/strictest`にしています。   
+詳しい説明は下記の記事が参考になります。   
+https://zenn.dev/yuta_ura/articles/introduce-tsconfig-bases
 
-```shell
+`pathのalias`の設定も忘れずにしましょう！   
+`src`からのpathを`@src/`からの絶対パスで呼べるようになります。
+
+```shell:ターミナル
 $ yarn add -D @tsconfig/strictest
 ```
 
-```diff json
+```diff json:tsconfig.json
 {
 +  "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
@@ -148,10 +160,39 @@ $ yarn add -D @tsconfig/strictest
 ```
 
 
-### prettierの設定を変更する
-```shell
+## prettierを導入する
+prettierが無いとつらいのでprettierを導入します。
+
+### prettierの設定ファイルを作成する
+```shell:ターミナル
+$ touch .prettierrc
+$ touch .prettierignore
+```
+
+```diff text:ディレクトリ
+.
+├── .eslintrc.json
+├── .gitignore
++├── .prettierignore
++├── .prettierrc
+├── README.md
+├── next-env.d.ts
+├── next.config.js
+├── package.json
+├── src
+│   └── pages
+│       ├── _app.tsx
+│       └── index.tsx
+├── tsconfig.json
+└── yarn.lock
+```
+
+### prettierをインストールする
+
+```shell:ターミナル
 $ yarn add -D prettier
 ```
+
 
 ```json:.prettierrc
 {
@@ -169,12 +210,16 @@ yarn.lock
 node_modules
 ```
 
-## npm scriptsを変更する
-```shell
+## formatとlintの設定をする
+
+### npm-run-allをインストールする
+```shell:ターミナル
 $ yarn add -D npm-run-all
 ```
 
-```json
+### package.jsonのscriptsにformatとlintの設定をする
+
+```json:package.json
 {
   "scripts": {
     "dev": "next dev",
@@ -189,17 +234,16 @@ $ yarn add -D npm-run-all
     "format:prettier": "yarn lint:prettier --write"
   }
 }
-
 ```
 
-## formatする
+### formatする
 ```shell
 $ yarn format
 ```
 
 ## ここまでのディレクトリ
 
-```shell
+```text:ディレクトリ
 .
 ├── .eslintrc.json
 ├── .gitignore
@@ -214,10 +258,8 @@ $ yarn format
 │       ├── _app.tsx
 │       └── index.tsx
 ├── tsconfig.json
-├── tsconfig.tsbuildinfo
-├── yarn-error.log
 └── yarn.lock
 ```
 
-## ここまでのブランチ
+## Next.jsのセットアップが完了した地点のブランチ
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter1
