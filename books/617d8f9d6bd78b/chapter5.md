@@ -40,7 +40,7 @@ export declare interface UserCredential {
 
 ### createUserWithEmailAndPasswordの使い方
 
-`createUserWithEmailAndPassword`は返り値が`Primise`なので`async関数`の中で`await`してあげる必要があります。
+`createUserWithEmailAndPassword`は返り値が`Promise`なので`async関数`の中で`await`してあげる必要があります。
 
 
 ```ts:createUserWithEmailAndPassword
@@ -199,7 +199,7 @@ export default Page
 ここでは一旦`useState`を使ってフォームの状態を管理していきます。
 
 
-```diff tsx
+```diff tsx:src/pages/signup/index.tsx
 import {
   Box,
   Button,
@@ -276,9 +276,9 @@ export default Page
 
 ### Firebase Authenticationとサインアップフォームを紐付けよう
 `handleSubmit`の中身を先程の`createUserWithEmailAndPassword`と`sendEmailVerification`にしましょう   
-`form`の値をリセットするのを忘れないようにしましょう
+また、成功した場合に`form`の値をリセットするのを忘れないようにしましょう
 
-```diff tsx
+```diff tsx:src/pages/signup/index.tsx
 
 ```diff tsx:src/pages/signup/index.tsx
 import {
@@ -385,7 +385,7 @@ export default Page
 Chakra UIのButtonコンポーネントは`isLoading`を受け取ってローディングのアニメーションを表示してくれるのでそれも使いましょう
 https://chakra-ui.com/docs/components/toast/usage
 
-```diff tsx
+```diff tsx:src/pages/signup/index.tsx
 import {
   Box,
   Button,
