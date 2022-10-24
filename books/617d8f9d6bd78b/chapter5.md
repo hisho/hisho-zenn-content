@@ -3,15 +3,121 @@ title: "サインアップ機能の実装"
 ---
 
 # サインアップ
+まず最初に 、サインアップ機能を実装しましょう！   
+今回はメールアドレスとパスワードを使った認証方法で実装していきます。   
+大まかな流れは下記のようになります。   
+1. createUserWithEmailAndPasswordでアカウント作成
+2. sendEmailVerificationで作成したメールアドレスに確認メールを送信
+
+## Firebase Authenticationを使ってサインアップする
+https://firebase.google.com/docs/auth/web/password-auth?hl=ja#create_a_password-based_account
+
+## createUserWithEmailAndPasswordを使ってサインアップしよう
+Firebase Authenticationでメールアドレスとパスワードを使った認証を行うには、`createUserWithEmailAndPassword`を使います。   
+`createUserWithEmailAndPassword`の型定義を見てみると`auth`と`email`と`password`を引数に取り、`Promise<UserCredential>`を返す関数になっています。
+```ts:auth-public.d.ts
+export declare function createUserWithEmailAndPassword(auth: Auth, email: string, password: string): Promise<UserCredential>;
+```
+
+返り値の`UserCredential`は、`user`と`providerId`と`operationType`を持っています。
+
+```ts:auth-public.d.ts
+export declare interface UserCredential {
+    /**
+     * The user authenticated by this credential.
+     */
+    user: User;
+    /**
+     * The provider which was used to authenticate the user.
+     */
+    providerId: string | null;
+    /**
+     * The type of operation which was used to authenticate the user (such as sign-in or link).
+     */
+    operationType: typeof OperationType[keyof typeof OperationType];
+}
+```
+
+### createUserWithEmailAndPasswordの使い方
+
+`createUserWithEmailAndPassword`は返り値が`Primise`なので`async関数`の中で`await`してあげる必要があります。
+
+
+```ts:createUserWithEmailAndPassword
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
+import { FirebaseError } from '@firebase/util'
+
+const signUp = async () => {
+  try {
+    const auth = getAuth()
+    await createUserWithEmailAndPassword(auth, email, password)
+  } catch (e) {
+    if (e instanceof FirebaseError) {
+      console.log(e)
+    }
+  }
+}
+```
+
+### createUserWithEmailAndPasswordのエラー処理
+`catch`した引数にunknownのerrorを受け取れるので、`instanceof`で`FirebaseError`かどうかを判定してあげる必要があります。   
+今回は`console.log`でエラーを表示していますが、実際にはエラーを表示するUIを作成してあげる必要があります。
+
+```ts:createUserWithEmailAndPasswordのエラー処理
+try {
+} catch (e) {   
+  if (e instanceof FirebaseError) {
+    console.log(e)
+  }
+}
+```
+
+## Firebase Authenticationを使って確認メールを送信しよう
+https://firebase.google.com/docs/auth/web/manage-users?hl=ja#send_a_user_a_verification_email
+
+### sendEmailVerificationを使って確認メールを送信しよう
+`createUserWithEmailAndPassword`でアカウントを作成した後にメールアドレスが正しいものか確認する必要があるので、`sendEmailVerification`を使ってメールアドレスに確認メールを送信します。   
+`sendEmailVerification`の型定義を見てみると`user`と`actionCodeSettings(option)`を引数に取り、`Promise<void>`を返す関数になっています。
+
+```ts:auth-public.d.ts
+export declare function sendEmailVerification(user: User, actionCodeSettings?: ActionCodeSettings | null): Promise<void>;
+```
+
+ここで先程の`createUserWithEmailAndPassword`の返り値の`userCredential`から`user`を取得し`sendEmailVerification`に渡してあげることでユーザーに紐付いているメールアドレスに確認メールが送信されます。
+
+```diff ts:createUserWithEmailAndPasswordWithSendEmailVerification
+import { sendEmailVerification, getAuth } from 'firebase/auth'
+import { FirebaseError } from '@firebase/util'
+
+const signUp = async () => {
+  try {
+    const auth = getAuth()
+-    await createUserWithEmailAndPassword(auth, email, password)
++    const userCredential = await createUserWithEmailAndPassword(
++      auth,
++      email,
++      password
++    )
++    await sendEmailVerification(userCredential.user)
+  } catch (e) {
+    if (e instanceof FirebaseError) {
+      console.log(e)
+    }
+  }
+}
+
+```
+
 
 ## サインアップページの作成
+Firebaseのサインアップ方法がわかったので、実際にサインアップページを作成していきます。
 
-```shell
+```shell:ターミナル
 $ mkdir -p src/pages/signup
 $ touch src/pages/signup/index.tsx
 ```
 
-```diff shell
+```diff shell:ディレクトリ
 src
 ├── constant
 │   └── env.ts
@@ -33,10 +139,12 @@ export const Page = () => {
 export default Page
 ```
 
+
+
 ![](/images/firebase-chat-book/chapter5-01.png)
 
-## UIを整える
-
+## サインアップページのUIを整えましょう
+`Chakra UI`を使って最低限の見た目を作成します。
 
 ```diff tsx:src/pages/signup/index.tsx
 +import {
@@ -86,7 +194,10 @@ export default Page
 
 ![](/images/firebase-chat-book/chapter5-02.png)
 
-## フォームの状態を管理する
+## サインアップページフォームの状態を管理しよう
+このままでは`メールアドレス`と`パスワード`が送信できないので、フォームの状態を管理する必要があります。   
+ここでは一旦`useState`を使ってフォームの状態を管理していきます。
+
 
 ```diff tsx
 import {
@@ -163,54 +274,11 @@ export default Page
 
 ![](/images/firebase-chat-book/chapter5-03.png)
 
-## Firebase Authenticationを使ってサインアップする
+### Firebase Authenticationとサインアップフォームを紐付けよう
+`handleSubmit`の中身を先程の`createUserWithEmailAndPassword`と`sendEmailVerification`にしましょう   
+`form`の値をリセットするのを忘れないようにしましょう
 
-### Firebase Authenticationのアカウント作成の概要
-https://firebase.google.com/docs/auth/web/password-auth?hl=ja#create_a_password-based_account
-
-```ts:createUserWithEmailAndPassword
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
-import { FirebaseError } from '@firebase/util'
-
-const signUp = async () => {
-  try {
-    const auth = getAuth()
-    await createUserWithEmailAndPassword(auth, email, password)
-  } catch (e) {
-    if (e instanceof FirebaseError) {
-      console.log(e)
-    }
-  }
-}
-```
-
-`sendEmailVerification`を使ってメールアドレスを確認するメールを送信する必要がある
-https://firebase.google.com/docs/auth/web/manage-users?hl=ja#send_a_user_a_verification_email
-
-```diff ts:createUserWithEmailAndPasswordWithSendEmailVerification
-import { sendEmailVerification, getAuth } from 'firebase/auth'
-import { FirebaseError } from '@firebase/util'
-
-const signUp = async () => {
-  try {
-    const auth = getAuth()
--    await createUserWithEmailAndPassword(auth, email, password)
-+    const userCredential = await createUserWithEmailAndPassword(
-+      auth,
-+      email,
-+      password
-+    )
-+    await sendEmailVerification(userCredential.user)
-  } catch (e) {
-    if (e instanceof FirebaseError) {
-      console.log(e)
-    }
-  }
-}
-
-```
-
-### Firebase Authenticationのアカウント作成の実装
+```diff tsx
 
 ```diff tsx:src/pages/signup/index.tsx
 import {
@@ -302,13 +370,19 @@ export const Page = () => {
 export default Page
 ```
 
-
+### Firebaseの`Authentication`のコンソールを確認しよう
+自分が送信したメールアドレスが増えていればOKです
 ![](/images/firebase-chat-book/chapter5-04.gif)
+
+### メールアドレスの確認をしよう
+メールボックスを確認してFirebaseからメールが来ていないか確認しましょう。   
+規定な場合は迷惑メールに分類されている可能性もあります。
 ![](/images/firebase-chat-book/chapter5-05.png)
 ![](/images/firebase-chat-book/chapter5-06.png)
 
-## UX改善する
-loadingとトーストを追加した
+## サインアップページのUX改善しよう
+このままでは流石に成功したのか失敗したのか分からないのでChakra UIのtoastを使ってUXを改善しましょう   
+Chakra UIのButtonコンポーネントは`isLoading`を受け取ってローディングのアニメーションを表示してくれるのでそれも使いましょう
 https://chakra-ui.com/docs/components/toast/usage
 
 ```diff tsx
@@ -420,5 +494,9 @@ export default Page
 
 ![](/images/firebase-chat-book/chapter5-07.gif)
 
+以上でサインアップページの作成は完了です。
+お疲れさまでした。
+
+## サインアップが完了した地点のブランチ
 
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter5
