@@ -255,4 +255,4 @@ export default MyApp
 ```
 
 ## ここまでのブランチ
-https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter2
+https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter4
