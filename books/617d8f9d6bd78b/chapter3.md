@@ -4,7 +4,7 @@ title: "Firebaseのセットアップ"
 
 # Firebaseのセットアップ
 Firebaseのセットアップを行います。   
-画像が小さくて見づらい場合は拡大してください。
+Firebaseのプロジェクトを作成し、`認証(Firebase Authentication)`とデータベース`(Firebase Realtime Database)`を有効にします。
 
 ## 目次
 
@@ -79,3 +79,5 @@ Firebase Realtime Databaseを有効にします。
 
 下記の画面のようになればOKです。
 ![](/images/firebase-chat-book/chapter3-17.png)
+
+以上でFirebaseのセットアップは完了です。
