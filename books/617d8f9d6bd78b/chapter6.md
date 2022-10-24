@@ -3,15 +3,58 @@ title: "サインイン機能の実装"
 ---
 
 # サインイン
+次にに 、サインイン機能を実装しましょう！   
+アカウントの作成ができたので、アカウントを使ってサインインできるようにします。
+大まかな流れは下記のようになります。
+
+1. signInWithEmailAndPasswordでログイン
+
+
+## Firebase Authenticationを使ってサインインする
+
+https://firebase.google.com/docs/auth/web/password-auth?hl=ja#sign_in_a_user_with_an_email_address_and_password
+
+## signInWithEmailAndPasswordを使ってサインインしよう
+Firebase Authenticationでメールアドレスとパスワードを使ったサインインを行うには、signInWithEmailAndPasswordを使います。
+`signInWithEmailAndPassword`の型定義を見てみると`auth`と`email`と`password`を引数に取り、`Promise<UserCredential>`を返す関数になっています。   
+返り値は`createUserWithEmailAndPassword`と同じですね
+
+```ts:auth-public.d.ts
+export declare function signInWithEmailAndPassword(auth: Auth, email: string, password: string): Promise<UserCredential>;
+```
+
+### signInWithEmailAndPasswordの使い方
+`signInWithEmailAndPassword`は返り値が`Promise`なので`async関数`の中で`await`してあげる必要があります。
+
+```ts:signInWithEmailAndPassword
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { FirebaseError } from '@firebase/util'
+
+const signIn = async () => {
+  try {
+    const auth = getAuth()
+    await signInWithEmailAndPassword(auth, email, password)
+  } catch (e) {
+    if (e instanceof FirebaseError) {
+      console.log(e)
+    }
+  }
+}
+```
+
+### signInWithEmailAndPasswordのエラーを処理
+`catch`した引数にunknown型のerrorを受け取れるので、`instanceof`で`FirebaseError`かどうかを判定してあげる必要があります。
+今回は`console.log`でエラーを表示していますが、実際にはエラーを表示するUIを作成してあげる必要があります。
 
 ## サインインページの作成
+Firebaseのサインイン方法がわかったので、実際にサインインページを作成していきます。
 
-```shell
+```shell:ターミナル
 $ mkdir -p src/pages/signin
 $ touch src/pages/signin/index.tsx
 ```
 
-```diff text
+```diff text:ディレクトリ
 src
 ├── constant
 │   └── env.ts
@@ -37,8 +80,9 @@ export default Page
 
 ![](/images/firebase-chat-book/chapter6-01.png)
 
-## UIを整える
-サインアップと同じ
+## サインインページのUIを整えましょう
+Chakra UIを使って最低限の見た目を作成します。   
+一旦サインアップと全く同じです。
 
 ```diff tsx:src/pages/signin/index.tsx
 +import {
@@ -87,7 +131,10 @@ export default Page
 ```
 ![](/images/firebase-chat-book/chapter6-02.png)
 
-## フォームの状態を管理する
+## サインインページフォームの状態を管理しよう
+このままでは`メールアドレス`と`パスワード`が送信できないので、フォームの状態を管理する必要があります。   
+ここでは一旦`useState`を使ってフォームの状態を管理していきます。   
+ここもサインアップページと同じです。
 
 ```diff tsx:src/pages/signin/index.tsx
 import {
@@ -160,32 +207,13 @@ export const Page = () => {
 export default Page
 ```
 
-下記の画面のようにアカウントを作成を押してconsoleで入力した値が確認できたらOKです
+下記の画面のよう`にログイン`を押してconsoleで入力した値が確認できたらOKです
 
 ![](/images/firebase-chat-book/chapter6-03.png)
 
-## Firebase Authenticationを使ってサインインする
-
-### Firebase Authenticationのサインインの概要
-
-https://firebase.google.com/docs/auth/web/password-auth?hl=ja#sign_in_a_user_with_an_email_address_and_password
-```ts
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { FirebaseError } from '@firebase/util'
-
-const signIn = async () => {
-  try {
-    const auth = getAuth()
-    await signInWithEmailAndPassword(auth, email, password)
-  } catch (e) {
-    if (e instanceof FirebaseError) {
-      console.log(e)
-    }
-  }
-}
-```
-
-## Firebase Authenticationのログインの実装
+## Firebase Authenticationとサインインフォームを紐付けよう
+`handleSubmit`の中身を先程の`signInWithEmailAndPassword`にしましょう
+また、成功した場合に`form`の値をリセットするのを忘れないようにしましょう
 
 ```diff tsx:src/pages/signin/index.tsx
 import {
@@ -270,9 +298,12 @@ export default Page
 
 コンソールにエラーがでなければOKです！
 
-## UXを改善する
+## サインインページのUX改善しよう
+このままでは流石に成功したのか失敗したのか分からないのでChakra UIのtoastを使ってUXを改善しましょう   
+Chakra UIのButtonコンポーネントは`isLoading`を受け取ってローディングのアニメーションを表示してくれるのでそれも使いましょう   
+ここもサインアップページと同じです。
 
-```diff tsx
+```diff tsx:src/pages/signin/index.tsx
 import {
   Box,
   Button,
@@ -374,5 +405,9 @@ export default Page
 
 ![](/images/firebase-chat-book/chapter6-04.gif)
 
+以上でサインインページの作成は完了です。
+お疲れさまでした。
+
+## サインインが完了した地点のブランチ
 
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter6
