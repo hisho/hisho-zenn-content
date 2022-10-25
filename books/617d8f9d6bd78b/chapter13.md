@@ -1,15 +1,20 @@
 ---
 title: "pathを型安全にする"
 ---
-`string`のままでは危ないので型安全にする
+
+# pathを型安全にしよう
+ページ遷移のpathが文字列で書かれていると、pathが間違っているときにエラーが発生します。  
+そこでpathpidaを導入し、型安全にします。
 
 
-## pathpidaを導入する
+## pathpidaを導入しよう
 pathをハードコードで書いてきたので、pathpidaを導入します。
 
-```shell
+```shell:ターミナル
 $ yarn add pathpida
 ```
+
+.gitignoreにpathpidaで生成されるファイルを追加します。
 
 ```diff ignore:.gitignore
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
@@ -53,6 +58,9 @@ next-env.d.ts
 +src/lib/pathpida/$path.ts
 ```
 
+## pathpidaを設定しよう
+`yarn dev`した時と`yarn build`した時にpathpidaが動くようにします。
+
 ```diff json:package.json
 {
   "scripts": {
@@ -77,15 +85,15 @@ next-env.d.ts
 }
 ```
 
-## pathpidaを使ったuseRouterとLinkのwrapperを作成する
+## pathpidaを使ったuseRouterとLinkのwrapperを作成しよう
 pathpidaを使って、useRouterとLinkのwrapperを作成します。
 
-```shell
+```shell:ターミナル
 $ mkdir -p src/hooks/useRouter
 $ touch src/hooks/useRouter/useRouter.ts
 ````
 
-```diff shell
+```diff shell:ディレクトリ
 src
 ├── component
 │   └── Header
@@ -118,6 +126,19 @@ src
         └── index.tsx
 ```
 
+## useRouterのwrapperを作成しよう
+next.jsのuseRouterのwrapperを作成します。
+`(url: UrlObject | ((path: PagesPath) => UrlObject)`とすることで毎回pathpidaの生成するpathをimportしなくてもよくなります。
+
+```ts:普通にimportするパターン
+import { pagesPath } from '@src/lib/pathpida/$path';
+push(pagesPath.$url())
+```
+
+```ts:高階関数パターン
+push((path) => path.$url())
+```
+
 ```ts:src/hooks/useRouter/useRouter.ts
 import { useRouter as useNextRouter } from 'next/router'
 import { useCallback } from 'react'
@@ -147,12 +168,17 @@ export const useRouter = () => {
 }
 ```
 
-```shell
+
+## Linkのwrapperを作成しよう
+next.jsのLinkのwrapperを作成します。
+今回は純粋にページ遷移するだけのコンポーネントなので`Link`から`Navigate`に名前を変更しています。
+
+```shell:ターミナル
 $ mkdir -p src/component/Navigate
 $ touch src/component/Navigate/Navigate.tsx
 ```
 
-```diff shell
+```diff shell:ディレクトリ
 src
 ├── component
 │   ├── Header
@@ -187,6 +213,8 @@ src
         └── index.tsx
 ```
 
+NavigateのhrefもuseRouterと同様に`(url: UrlObject | ((path: PagesPath) => UrlObject)`としています。
+
 ```tsx
 import type { ReactNode } from 'react'
 import Link from 'next/link'
@@ -208,7 +236,9 @@ export const Navigate = ({ href, children }: Props) => {
 ```
 
 
-## 既存のpahtをpathpidaに置き換える
+## 既存のpathをpathpidaに置き換えよう
+先程作成した、useRouterとnext.jsのLinkのwrapperを使って既存のpathをpathpidaに置き換えます。
+
 
 ```diff tsx:src/feature/auth/AuthGuard/AuthGuard.tsx
 import { useAuthContext } from '@src/feature/auth/provider/AuthProvider'
@@ -326,4 +356,10 @@ export const Header = () => {
 }
 ```
 
+
+以上でpathの型安全はは完了です。
+お疲れさまでした。
+
+
+## pathの型安全が完了した地点のブランチ
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter13
