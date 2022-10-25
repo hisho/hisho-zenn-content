@@ -188,6 +188,6 @@ export const Header = () => {
 以上でサインアウト機能の作成は完了です。
 お疲れさまでした。
 
-サインアウトが完了した地点のブランチ
+## サインアウトが完了した地点のブランチ
 
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter8
