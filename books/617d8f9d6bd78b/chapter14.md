@@ -2,17 +2,16 @@
 title: "Footerの作成"
 ---
 
-# Footerの作成
+# Footerの作成しよう
+現状だとページ遷移がURLを直接入力するしかないので、ページ遷移を行えるようにします。
 
-リンクを表示させたいので、Footer.tsxを作成します。
 
-
-```shell
+```shell:ターミナル
 $ mkdir -p src/component/Footer
 $ touch src/component/Footer/Footer.tsx
 ```
 
-```diff shell
+```diff shell:ディレクトリ
 src
 ├── component
 +│   ├── Footer
@@ -87,7 +86,7 @@ export default MyApp
 
 ![](/images/firebase-chat-book/chapter14-01.png)
 
-## UIを整える
+## FooterのUIを整えましょう
 
 ```diff tsx
 -import { chakra, Container } from '@chakra-ui/react'
@@ -121,5 +120,10 @@ export const Footer = () => {
 
 ![](/images/firebase-chat-book/chapter14-02.gif)
 
+以上でFooterの作成は完了です。
+お疲れさまでした。
+
+
+## Footerの作成が完了したブランチ
 
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter14
