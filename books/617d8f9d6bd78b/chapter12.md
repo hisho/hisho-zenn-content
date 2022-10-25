@@ -2,11 +2,12 @@
 title: "[UI実装編]Headerを整える"
 ---
 
-
 # HeaderのUIを整える
+これまでの機能実装でリアルタイムチャットは終わりですが、まだUIが整っていないので整えていきます。
 
 ## pages/index.tsxのAuthGuardを外す
-トップページで認証をかけたくないので外す
+トップページには認証が必要ないので、`pages/index.tsx`の`<AuthGuard>`を外します。
+
 
 ```diff tsx:src/pages/index.tsx
 import type { NextPage } from 'next'
@@ -25,9 +26,9 @@ const Page: NextPage = () => {
 export default Page
 ```
 
-## Headerを整える
+## Headerを整えましょう
+最低限のUIしか作っていなかったので、よくあるUIにしましょう。
 
-- UIを整えた
 - isLoadingを削除
 - トップページへのリンク追加
 - ログインの状態によってUIを出し分け
@@ -130,4 +131,9 @@ export const Header = () => {
 
 ![](/images/firebase-chat-book/chapter12-01.gif)
 
+以上でHeaderのUI調整は完了です。
+お疲れさまでした。
+
+
+## HeaderのUI調整が完了した地点のブランチ
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter12
