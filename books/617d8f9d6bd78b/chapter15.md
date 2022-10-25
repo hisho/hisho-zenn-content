@@ -2,7 +2,12 @@
 title: "細かい機能を実装する"
 ---
 
-## ログイン後にチャットページにリダイレクトする
+# 細かい機能を実装する
+最後に細かい機能を修正しましょう。
+
+
+## サインイン後にチャットページにリダイレクトさせよう
+サインイン後にページ遷移しないと不便なので、ページ遷移するようにしましょう。
 
 ```diff tsx:src/pages/signin/index.tsx
 import {
@@ -106,6 +111,10 @@ export default Page
 ```
 
 ![](/images/firebase-chat-book/chapter15-01.gif)
+
+
+## サインアップ後にチャットページにリダイレクトさせよう
+サインアップ後にもページ遷移しないと不便なので、ページ遷移するようにしましょう。
 
 ```diff tsx:pages/signup/index.tsx
 import {
@@ -218,8 +227,8 @@ export default Page
 
 ![](/images/firebase-chat-book/chapter15-02.gif)
 
-## AuthGuardをチャットページに適用する
-認証がかかってないのでかけましょう
+## チャットページにAuthGuardを適用させよう
+チャットページは認証が必要になるので、AuthGuardを適用させましょう
 
 ```diff tsx:pages/chat/index.tsx
 import {
@@ -318,7 +327,9 @@ export default Page
 ```
 
 
-## このままだと最新のメッセージがうまるので修正する
+## 最新のチャットメッセージが埋まるのでメッセージを送信するたびに最新のチャットを表示しよう
+下記の画像のようにメッセージを送信するとスクロールに埋もれてしまうので、メッセージを送信するたびに最新のチャットを表示するようにしましょう
+chatを表示している要素の`ref`を取得し、`ref.current.scrollTop`に`ref.current.scrollHeight`を代入することで最新のチャットを表示することができます
 
 ![](/images/firebase-chat-book/chapter15-03.gif)
 
@@ -360,7 +371,7 @@ const Message = ({ message }: MessageProps) => {
 }
 
 export const Page = () => {
--  const messagesElementRef = useRef<HTMLDivElement | null>(null)
++  const messagesElementRef = useRef<HTMLDivElement | null>(null)
   const [message, setMessage] = useState<string>('')
 
   const handleSendMessage = async (e: FormEvent<HTMLFormElement>) => {
@@ -436,18 +447,19 @@ export default Page
 
 ![](/images/firebase-chat-book/chapter15-04.gif)
 
-## コンテンツが無い時も画面いっぱいまでコンテンツを広げる
+## コンテンツが少ないときでもコンテンツが画面いっぱいになるようにしよう
+Chakra UIのthemeを拡張して、`#__next`に`flex`と`column`を指定することでコンテンツが少ないときでもコンテンツが画面いっぱいになるようにしましょう
 
 ![](/images/firebase-chat-book/chapter15-05.png)
 
 https://chakra-ui.com/docs/styled-system/customize-theme
 
-```shell
+```shell:ターミナル
 $ mkdir -p src/lib/chakra
 $ touch src/lib/chakra/theme.ts
 ```
 
-```diff shell
+```diff shell:ディレクトリ
 src
 ├── component
 │   ├── Footer
@@ -538,7 +550,9 @@ export default MyApp
 
 ![](/images/firebase-chat-book/chapter15-06.png)
 
-## chatページがくずれたので修正
+## チャットページがくずれたので修正しよう
+チャット画面もコンテンツが少ないときでもコンテンツが画面いっぱいになるようにしましょう。
+また、flexをcolumnにした時にminHeightを0にしないと表示が崩れるので忘れずに指定しましょう。
 
 ![](/images/firebase-chat-book/chapter15-07.png)
 
@@ -695,5 +709,11 @@ export default Page
 ```
 
 ![](/images/firebase-chat-book/chapter15-08.png)
+
+以上でリアルタイムチャットの完成です。
+お疲れさまでした。
+
+
+## チャットが完成したブランチ
 
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter15
