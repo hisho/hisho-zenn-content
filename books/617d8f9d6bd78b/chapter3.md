@@ -1,20 +1,12 @@
 ---
-title: "Firebaseのセットアップ"
+title: "Firebaseをセットアップしよう"
 ---
 
-# Firebaseのセットアップ
+# Firebaseをセットアップしよう
 Firebaseのセットアップを行います。   
 Firebaseのプロジェクトを作成し、`認証(Firebase Authentication)`とデータベース`(Firebase Realtime Database)`を有効にします。
 
-## 目次
-
-1. プロジェクトの作成
-2. アプリにFirebaseを追加
-3. Firebase Authenticationを有効化
-4. Firebase Realtime Databaseを有効化
-
-
-## Firebaseのプロジェクトを作成する
+## Firebaseのプロジェクトを作成しよう
 [https://console.firebase.google.com](https://console.firebase.google.com)にアクセスし、`プロジェクトの作成`を押します。
 
 ![](/images/firebase-chat-book/chapter3-01.png)
@@ -30,7 +22,7 @@ Googleアナリティクスの設定をするか聞かれるのですが、今�
 
 ![](/images/firebase-chat-book/chapter3-04.png)
 
-## アプリにFirebaseを追加する
+## アプリにFirebaseを追加しよう
 プロジェクト作成後にアプリにFirebaseを追加する設定をします。   
 今回はwebアプリなので、`ウェブ`のボタンを押します。
 ![](/images/firebase-chat-book/chapter3-05.png)
@@ -44,7 +36,7 @@ Firebase SDKのセットアップをする画面が表示されます。
 Next.jsとの連携するのに必要な情報ですが、後で設定するのでここでは一旦`コンソールに進む`を押します。
 ![](/images/firebase-chat-book/chapter3-07.png)
 
-## Firebase Authenticationを有効にする
+## Firebase Authenticationを有効にしよう
 
 Firebase Authenticationを有効にします。   
 左の`構築`から`Authentication`を探してクリックします。
@@ -61,7 +53,8 @@ Firebase Authenticationを有効にします。
 
 下記の画面のようになればOKです。
 ![](/images/firebase-chat-book/chapter3-12.png)
-## Firebase Realtime Databaseを有効にする
+
+## Firebase Realtime Databaseを有効にしよう
 
 Firebase Realtime Databaseを有効にします。   
 左の`構築`から`Realtime Database`を探してクリックします。
