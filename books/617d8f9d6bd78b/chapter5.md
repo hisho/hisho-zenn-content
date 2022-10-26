@@ -1,15 +1,15 @@
 ---
-title: "サインアップ機能の実装"
+title: "サインアップの機能の実装しよう"
 ---
 
-# サインアップ
+# サインアップの機能の実装しよう
 まず最初に 、サインアップ機能を実装しましょう！   
 今回はメールアドレスとパスワードを使った認証方法で実装していきます。   
 大まかな流れは下記のようになります。   
 1. createUserWithEmailAndPasswordでアカウント作成
 2. sendEmailVerificationで作成したメールアドレスに確認メールを送信
 
-## Firebase Authenticationを使ってサインアップする
+## Firebase Authenticationを使ってサインアップしよう
 https://firebase.google.com/docs/auth/web/password-auth?hl=ja#create_a_password-based_account
 
 ## createUserWithEmailAndPasswordを使ってサインアップしよう
@@ -109,7 +109,7 @@ const signUp = async () => {
 ```
 
 
-## サインアップページの作成
+## サインアップページの作成しよう
 Firebaseのサインアップ方法がわかったので、実際にサインアップページを作成していきます。
 
 ```shell:ターミナル
@@ -143,7 +143,7 @@ export default Page
 
 ![](/images/firebase-chat-book/chapter5-01.png)
 
-## サインアップページのUIを整えましょう
+## サインアップページのUIを整えよう
 `Chakra UI`を使って最低限の見た目を作成します。
 
 ```diff tsx:src/pages/signup/index.tsx
