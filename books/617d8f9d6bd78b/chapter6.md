@@ -1,8 +1,8 @@
 ---
-title: "サインイン機能の実装"
+title: "サインインの機能の実装しよう"
 ---
 
-# サインイン
+# サインインの機能の実装しよう
 次にに 、サインイン機能を実装しましょう！   
 アカウントの作成ができたので、アカウントを使ってサインインできるようにします。
 大まかな流れは下記のようになります。
@@ -10,7 +10,7 @@ title: "サインイン機能の実装"
 1. signInWithEmailAndPasswordでログイン
 
 
-## Firebase Authenticationを使ってサインインする
+## Firebase Authenticationを使ってサインインしよう
 
 https://firebase.google.com/docs/auth/web/password-auth?hl=ja#sign_in_a_user_with_an_email_address_and_password
 
@@ -46,7 +46,7 @@ const signIn = async () => {
 `catch`した引数にunknown型のerrorを受け取れるので、`instanceof`で`FirebaseError`かどうかを判定してあげる必要があります。
 今回は`console.log`でエラーを表示していますが、実際にはエラーを表示するUIを作成してあげる必要があります。
 
-## サインインページの作成
+## サインインページの作成しよう
 Firebaseのサインイン方法がわかったので、実際にサインインページを作成していきます。
 
 ```shell:ターミナル
@@ -80,7 +80,7 @@ export default Page
 
 ![](/images/firebase-chat-book/chapter6-01.png)
 
-## サインインページのUIを整えましょう
+## サインインページのUIを整えよう
 Chakra UIを使って最低限の見た目を作成します。   
 一旦サインアップと全く同じです。
 
