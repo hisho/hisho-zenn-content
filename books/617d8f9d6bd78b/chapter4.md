@@ -1,24 +1,17 @@
 ---
-title: "Next.jsにFirebaseをセットアップ"
+title: "Next.jsにFirebaseをセットアップしよう"
 ---
-# Next.jsにFirebaseをセットアップ
-## 目次
+# Next.jsにFirebaseをセットアップしよう
 
-1. プロジェクトにfirebaseをインストール
-2. firebaseファイルを作成し、設定を記述
-3. firebaseConfigの中身を.env.localに移動する
-4. Next.jsでFirebaseを初期化する
-5. Firebaseの初期化を確認する
-
-## Firebaseをインストール
+## Firebaseをインストールしよう
 ```shell
 $ yarn add firebase
 ```
 
-## Firebaseの設定
+## Firebaseの設定しよう
 Firebaseの設定は、Firebaseのコンソールから取得できます。
 
-### src/lib/firebase/firebase.tsを作成する
+### src/lib/firebase/firebase.tsを作成しよう
 ```shell
 $ mkdir -p src/lib/firebase
 $ touch src/lib/firebase/firebase.ts
@@ -34,11 +27,12 @@ src
     └── index.tsx
 ```
 
-### Firebaseのコンソールから設定をコピーする
+### Firebaseのコンソールから設定をコピーしよう
 ![](/images/firebase-chat-book/chapter4-01.png)
 ![](/images/firebase-chat-book/chapter4-02.png)
 
-### src/lib/firebase/firebase.tsにコピーしたものを貼り付ける
+### src/lib/firebase/firebase.tsにコピーしたものを貼り付けよう
+
 ```diff ts:src/lib/firebase/firebase.ts
 -// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -59,7 +53,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 ```
 
-## firebaseConfigの中身を.env.localに移動する
+## firebaseConfigの中身を.env.localに移動しよう
 ```shell
 $ touch .env.local
 ```
@@ -89,7 +83,7 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 NEXT_PUBLIC_FIREBASE_APP_ID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
-### env.tsを作成する
+### env.tsを作成しよう
 ```shell
 $ mkdir -p src/constant
 $ touch src/constant/env.ts
@@ -123,7 +117,7 @@ export const FIREBASE_APP_ID = process.env['NEXT_PUBLIC_FIREBASE_APP_ID'] ?? ''
 ```
 
 
-### src/lib/firebase/firebase.tsのfirebaseConfigを.env.localの値に置き換える
+### src/lib/firebase/firebase.tsのfirebaseConfigを.env.localの値に置き換えよう
 
 ```diff ts:src/lib/firebase/firebase.ts
 import { initializeApp } from 'firebase/app'
@@ -154,9 +148,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 ```
 
-## Next.jsでFirebaseを初期化する
+## Next.jsでFirebaseを初期化しよう
 
-### initializeAppを_app.tsxで呼び、firebaseをアプリで初期化する
+### initializeAppを_app.tsxで呼び、firebaseをアプリで初期化しよう
 ```diff ts:src/lib/firebase/firebase.ts
 -import { initializeApp } from 'firebase/app'
 +import { getApp, getApps, initializeApp } from 'firebase/app'
@@ -201,7 +195,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default MyApp
 ```
 
-## Firebaseの初期化が正しく動いているか確認する
+## Firebaseの初期化が正しく動いているか確認しよう
 
 ```diff tsx:tsx:src/pages/_app.tsx
 import type { AppProps } from 'next/app'
@@ -254,5 +248,5 @@ export default MyApp
 └── yarn.lock
 ```
 
-## ここまでのブランチ
+## Next.jsにFirebaseのセットアップが完了した地点のブランチ
 https://github.com/hisho/zenn-firebase-chat-demo/tree/chapter4
