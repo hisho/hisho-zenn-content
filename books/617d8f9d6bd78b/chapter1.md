@@ -1,10 +1,10 @@
 ---
-title: "Next.jsのセットアップ"
+title: "Next.jsをセットアップしよう"
 ---
 
-# Next.jsのセットアップ
+# Next.jsをセットアップしよう
 
-Next.jsの[Getting Started](https://nextjs.org/docs/getting-started#automatic-setup)に沿って、Next.jsのプロジェクトを作成します。   
+はじめにNext.jsの[Getting Started](https://nextjs.org/docs/getting-started#automatic-setup)に沿って、Next.jsのプロジェクトを作成します。   
 今回は、TypeScriptを使うので、`--typescript`フラグを指定します。   
 適当な場所でターミナルを開きコマンドを実行します
 
@@ -34,21 +34,21 @@ $ yarn dev
 
 ![](/images/firebase-chat-book/chapter1-01.png)
 
-## 不要なファイルを削除して、ディレクトリ構成を整理する
+## 不要なファイルを削除して、ディレクトリ構成を整理しよう
 コマンドから削除していますが、最終的に下記のディレクトリ構成と同じになれば普通にGUIから削除しても問題ありません。
 
-### srcディレクトリを作成する
+### srcディレクトリを作成しよう
 ```shell:ターミナル
 $ mkdir src
 ```
 
-### 不要なファイル、フォルダを削除する
+### 不要なファイル、フォルダを削除しよう
 `public`、`styles`と`pages/api`は不要なので削除します
 ```shell:ターミナル
 $ rm -rf public && rm -rf styles && rm -rf pages/api
 ```
 
-### srcディレクトリに集約する
+### srcディレクトリに集約しよう
 `pages`ディレクトリの中身を`src`ディレクトリに移動します
 ```shell:ターミナル
 $ mv pages src/pages
@@ -80,7 +80,7 @@ $ mv pages src/pages
 └── yarn.lock
 ```
 
-## _app.tsxを整理する
+## _app.tsxを整理しよう
 `src/pages/_app.tsx`の`globals.css`が不要になったので削除します。
 
 ```diff tsx:src/pages/_app.tsx
@@ -94,7 +94,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default MyApp
 ```
 
-## index.tsxを整理する
+## index.tsxを整理しよう
 pages/index.tsxは中身をすべて消して下記のようにします。   
 `const Home: NextPage = () => {}`の部分の変数名は`export default`するのでなんでもいいので`Page`に統一するために`Home`を`Page`に変更します。
 
@@ -116,7 +116,7 @@ import type { NextPage } from 'next'
 なにもなくなりました。
 ![](/images/firebase-chat-book/chapter1-02.png)
 
-## TypeScriptの設定を変更する
+## TypeScriptの設定を変更しよう
 `TypeScript`の設定は厳しければ厳しいほどいいですが、自分で設定を書くのは面倒くさいので`@tsconfig/strictest`を導入します。   
 [Next.jsバージョン](https://github.com/tsconfig/bases#nextjs-tsconfigjson)もありますが、2022/10月地点では動かないので`@tsconfig/strictest`にしています。   
 詳しい説明は下記の記事が参考になります。   
@@ -160,10 +160,10 @@ $ yarn add -D @tsconfig/strictest
 ```
 
 
-## prettierを導入する
+## prettierを導入しよう
 prettierが無いとつらいのでprettierを導入します。
 
-### prettierの設定ファイルを作成する
+### prettierの設定ファイルを作成しよう
 ```shell:ターミナル
 $ touch .prettierrc
 $ touch .prettierignore
@@ -187,7 +187,7 @@ $ touch .prettierignore
 └── yarn.lock
 ```
 
-### prettierをインストールする
+### prettierをインストールしよう
 
 ```shell:ターミナル
 $ yarn add -D prettier
@@ -210,14 +210,14 @@ yarn.lock
 node_modules
 ```
 
-## formatとlintの設定をする
+## formatとlintの設定しよう
 
-### npm-run-allをインストールする
+### npm-run-allをインストールしよう
 ```shell:ターミナル
 $ yarn add -D npm-run-all
 ```
 
-### package.jsonのscriptsにformatとlintの設定をする
+### package.jsonのscriptsにformatとlintの設定しよう
 
 ```json:package.json
 {
@@ -236,7 +236,7 @@ $ yarn add -D npm-run-all
 }
 ```
 
-### formatする
+### formatしよう
 ```shell
 $ yarn format
 ```
