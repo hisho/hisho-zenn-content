@@ -1,8 +1,8 @@
 ---
-title: "Chakra UIのセットアップ"
+title: "Chakra UIをセットアップしよう"
 ---
 
-# Chakra UIのセットアップ
+# Chakra UIをセットアップしよう
 UIの実装は`Chakra UI`を使っていきます。   
 公式の`Installation`に則って、`Chakra UI`をインストールします。
 
@@ -12,7 +12,7 @@ https://chakra-ui.com/getting-started
 $ yarn add @chakra-ui/react @emotion/react @emotion/styled framer-motion
 ```
 
-### src/pages/_app.tsxにChakra UIを適用する
+### src/pages/_app.tsxにChakra UIを適用しよう
 Chakra UIは`ChakraProvider`で囲った配下でしか使えないですが、今回はアプリケーション全体で使いたいので`_app.tsx`に`ChakraProvider`を追記します。
 
 
@@ -36,7 +36,7 @@ https://zenn.dev/terrierscript/books/2021-05-chakra-ui
 
 基本的に`Box`か`chakra.[htmlタグ]`を使っておけば問題ないです。
 
-## Chakra UIが動いているか確認する
+## Chakra UIが動いているか確認しよう
 
 ```diff tsx:src/pages/index.tsx
 import type { NextPage } from 'next'
@@ -54,7 +54,6 @@ const Page: NextPage = () => {
 export default Page
 ```
 
-## Chakra UIが動いているか確認画面ん
 `Heading`で囲った部分の文字が大きくなっていることが確認できると思います。
 ![](/images/firebase-chat-book/chapter2-01.png)
 
