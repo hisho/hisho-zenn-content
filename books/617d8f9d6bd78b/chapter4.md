@@ -1,5 +1,5 @@
 ---
-title: "Next.jsにFirebaseをセットアップしよう"
+title: "[実装編]Next.jsにFirebaseをセットアップしよう"
 ---
 # Next.jsにFirebaseをセットアップしよう
 

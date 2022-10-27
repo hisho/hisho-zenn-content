@@ -1,5 +1,5 @@
 ---
-title: "Chakra UIをセットアップしよう"
+title: "[実装編]Chakra UIをセットアップしよう"
 ---
 
 # Chakra UIをセットアップしよう

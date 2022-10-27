@@ -1,5 +1,5 @@
 ---
-title: "AuthGuardを実装しよう"
+title: "[実装編]AuthGuardを実装しよう"
 ---
 
 # AuthGuardを実装しよう

@@ -1,5 +1,5 @@
 ---
-title: "[UI実装編]Headerを整えよう"
+title: "[実装編]Headerを整えよう"
 ---
 
 # Headerを整えよう

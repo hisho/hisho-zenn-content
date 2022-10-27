@@ -1,5 +1,5 @@
 ---
-title: "Footerを作成しよう"
+title: "[実装編]Footerを作成しよう"
 ---
 
 # Footerを作成しよう
