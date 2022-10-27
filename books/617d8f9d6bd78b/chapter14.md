@@ -1,8 +1,8 @@
 ---
-title: "Footerの作成"
+title: "Footerを作成しよう"
 ---
 
-# Footerの作成しよう
+# Footerを作成しよう
 現状だとページ遷移がURLを直接入力するしかないので、ページ遷移を行えるようにします。
 
 
@@ -86,7 +86,7 @@ export default MyApp
 
 ![](/images/firebase-chat-book/chapter14-01.png)
 
-## FooterのUIを整えましょう
+## FooterのUIを整えよう
 
 ```diff tsx
 -import { chakra, Container } from '@chakra-ui/react'
