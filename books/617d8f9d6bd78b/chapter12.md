@@ -1,11 +1,11 @@
 ---
-title: "[UI実装編]Headerを整える"
+title: "[UI実装編]Headerを整えよう"
 ---
 
-# HeaderのUIを整える
+# Headerを整えよう
 これまでの機能実装でリアルタイムチャットは終わりですが、まだUIが整っていないので整えていきます。
 
-## pages/index.tsxのAuthGuardを外す
+## pages/index.tsxのAuthGuardを外そう
 トップページには認証が必要ないので、`pages/index.tsx`の`<AuthGuard>`を外します。
 
 
@@ -26,7 +26,7 @@ const Page: NextPage = () => {
 export default Page
 ```
 
-## Headerを整えましょう
+## Headerを整えよう
 最低限のUIしか作っていなかったので、よくあるUIにしましょう。
 
 - isLoadingを削除
