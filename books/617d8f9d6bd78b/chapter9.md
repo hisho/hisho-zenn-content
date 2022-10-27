@@ -1,8 +1,8 @@
 ---
-title: "AuthGuardの実装"
+title: "AuthGuardを実装しよう"
 ---
 
-# AuthGuardの実装
+# AuthGuardを実装しよう
 AuthGuardとは、認証しているか判定して認証していない場合はサインイン画面に遷移させたりする機能のことです。   
 今回はAuthGuardを実装して、認証していない場合はサインイン画面に遷移させるようにします。
 
