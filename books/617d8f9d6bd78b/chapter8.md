@@ -1,12 +1,12 @@
 ---
-title: "サインアウト機能の実装"
+title: "サインアウト機能を実装しよう"
 ---
 
-# サインアウト
+# サインアウト機能を実装しよう
 最後に、サインアウト機能を実装しましょう！
 サインインをしたらサインアウトもしたいですよね
 
-## Firebase Authenticationを使ってサインアウトする
+## Firebase Authenticationを使ってサインアウトしよう
 
 https://firebase.google.com/docs/auth/web/password-auth?hl=ja#next_steps
 
@@ -41,13 +41,8 @@ const signOut = async () => {
 `catch`した引数にunknown型のerrorを受け取れるので、`instanceof`で`FirebaseError`かどうかを判定してあげる必要があります。
 今回は`console.log`でエラーを表示していますが、実際にはエラーを表示するUIを作成してあげる必要があります。
 
-
-
-
-
 ## サインアウトようのHeaderのUIを整えよう
 サインイン中はサインアウトできるボタンのUIを表示するようにします。
-
 
 ```diff tsx:src/component/Header/Header.tsx
 -import { chakra, Container, Heading } from '@chakra-ui/react'
