@@ -1,5 +1,5 @@
 ---
-title: "pathを型安全にする"
+title: "pathを型安全にしよう"
 ---
 
 # pathを型安全にしよう
