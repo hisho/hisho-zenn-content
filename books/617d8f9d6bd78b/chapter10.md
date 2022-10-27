@@ -1,11 +1,11 @@
 ---
-title: "チャットの送信機能の実装"
+title: "チャットの送信機能を実装しよう"
 ---
 
-# チャットの送信機能
-ついにチャットの送信の機能の実装をしましょう！
+# チャットの送信機能を実装しよう
+ついにチャットの送信の機能の実装です。
 
-## Firebase Realtime Databaseにデータを書き込む
+## Firebase Realtime Databaseにデータを書き込もう
 
 https://firebase.google.com/docs/database/admin/save-data?hl=ja
 https://firebase.google.com/docs/database/web/lists-of-data?hl=ja#listen_for_child_events
@@ -113,7 +113,7 @@ export default Page
 
 ![](/images/firebase-chat-book/chapter10-01.png)
 
-## チャットページのUIを整えましょう
+## チャットページのUIを整えよう
 一旦送信ボタンだけ作成してみましょう。
 
 ```diff tsx:src/pages/chat/index.tsx
