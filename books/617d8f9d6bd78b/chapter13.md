@@ -175,7 +175,7 @@ next.jsのLinkのwrapperを作成します。
 
 :::message alert
 Next.js v13の場合`Link`タグを使うと必ず`a`タグがレンダリングされエラーがでるようになるので、下記のアップグレードガイドを参考にしてください。
-[[アップグレード編]Next.js v13にアップデートしよう](/hisho/books/617d8f9d6bd78b/upgrate-next13%252Emd#%E4%BF%AE%E6%AD%A3%E3%81%97%E3%82%88%E3%81%86)
+[[アップグレード編]Next.js v13にアップデートしよう](/hisho/books/617d8f9d6bd78b/viewer/upgrate-next13#%E4%BF%AE%E6%AD%A3%E3%81%97%E3%82%88%E3%81%86)
 :::
 
 
