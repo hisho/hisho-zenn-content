@@ -173,6 +173,12 @@ export const useRouter = () => {
 next.jsのLinkのwrapperを作成します。
 今回は純粋にページ遷移するだけのコンポーネントなので`Link`から`Navigate`に名前を変更しています。
 
+:::message alert
+Next.js v13の場合`Link`タグを使うと必ず`a`タグがレンダリングされエラーがでるようになるので、下記のアップグレードガイドを参考にしてください。
+[[アップグレード編]Next.js v13にアップデートしよう](/hisho/books/617d8f9d6bd78b/upgrate-next13%252Emd#%E4%BF%AE%E6%AD%A3%E3%81%97%E3%82%88%E3%81%86)
+:::
+
+
 ```shell:ターミナル
 $ mkdir -p src/component/Navigate
 $ touch src/component/Navigate/Navigate.tsx
