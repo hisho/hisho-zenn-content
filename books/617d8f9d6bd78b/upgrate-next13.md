@@ -73,7 +73,7 @@ https://nextjs.org/docs/upgrading#v13-summary
 
 ![](/images/firebase-chat-book/upgrade-next13-02.png)
 
-[[実装編]pathを型安全にしよう](/hisho/books/617d8f9d6bd78b/chapter13%252Emd)の項目で作成した`Nevigate`が原因だと分かりました。
+[[実装編]pathを型安全にしよう](/hisho/books/617d8f9d6bd78b/viewer/chapter13)の項目で作成した`Nevigate`が原因だと分かりました。
 
 ## 修正しよう
 
