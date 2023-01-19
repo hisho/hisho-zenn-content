@@ -10,14 +10,14 @@ macOSでの開発を前提にしているので、Windowsの場合は適宜読�
 
 ## 使用技術
 - TypeScript
-- Next.js v12.x
+- Next.js v13.x
 - Firebase v9.x
 - Chakra UI v2.x
 
 ## 環境
 - Node.js v16.x
 - yarn v1.x
-- macOS Monterey
+- macOS Ventura
 - IntelliJ IDEA
 
 ## 機能
@@ -28,6 +28,7 @@ macOSでの開発を前提にしているので、Windowsの場合は適宜読�
 
 ## 更新履歴
 - 2022/10/28公開
+- 2023/01/19更新(Next.js v13へのアップデートガイドを追加)
 
 ## この本の対象者
 この本ではある程度ReactやTypeScript、Next.jsの知識があることを前提にしています。
