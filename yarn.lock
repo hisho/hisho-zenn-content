@@ -595,7 +595,7 @@ which@^1.2.9:
   dependencies:
     isexe "^2.0.0"
 
-zenn-cli@^0.1.136:
-  version "0.1.136"
-  resolved "https://registry.yarnpkg.com/zenn-cli/-/zenn-cli-0.1.136.tgz#4b5dd8b6907d5e7f5160994b7d9df9fbd7233ffa"
-  integrity sha512-61itdavSHmqNZK/W4rPY6pKBAdPnBF72FrXh5BSPbEF50QnffKHntk32SaGGnPD94g3oNdeznqqT6lEcfHj1jQ==
+zenn-cli@^0.1.144:
+  version "0.1.144"
+  resolved "https://registry.yarnpkg.com/zenn-cli/-/zenn-cli-0.1.144.tgz#6d1d46afefbaaa542951a3b0948267ba4552c7bd"
+  integrity sha512-vReeYJg2ySjIUKSm5shKdi8rLmMO31Mtk7/xcTJVMSY0sLWJemTgtV8Mcpe1lIvTLKwg5SjfAa3iWjX0HIy3EA==
