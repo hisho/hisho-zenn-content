@@ -4,13 +4,13 @@
   "description": "",
   "private": true,
   "scripts": {
-    "postinstall": "run-p init",
-    "start": "run-p preview open",
+    "postinstall": "run-p zenn:init",
+    "dev": "run-p zenn:preview open",
     "open": "open http://localhost:65535",
-    "preview": "zenn preview --port 65535",
-    "article": "zenn new:article",
-    "book": "zenn new:book",
-    "init": "zenn init"
+    "zenn:preview": "zenn preview --port 65535",
+    "new:article": "zenn new:article",
+    "new:book": "zenn new:book",
+    "zenn:init": "zenn init"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5",
