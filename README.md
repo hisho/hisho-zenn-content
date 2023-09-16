@@ -1,26 +1,13 @@
-# Zenn-content
+# [https://zenn.dev/hisho](https://zenn.dev/hisho)
 
-## install
+## install📦
 
 ```shell script
-npm ci
+pnpm i
 ```
 
-## Preview & Watch
+## Preview & Watch🎉
 ```shell script
-npm start
-```
-## Preview
-```shell script
-npm run preview
+pnpm dev
 ```
 
-## create article
-```shell script
-npm run article
-```
-
-## create book
-```shell script
-npm run book
-```
